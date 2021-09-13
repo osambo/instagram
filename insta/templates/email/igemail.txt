@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to the instagram App and have fun with your followers.
