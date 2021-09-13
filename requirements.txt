@@ -1,2 +1,16 @@
-Django==2.0
+asgiref==3.4.1
+certifi==2021.5.30
+charset-normalizer==2.0.4
+confusable-homoglyphs==3.2.0
+Django==3.2.7
+django-bootstrap3==15.0.0
+django-registration==3.2
+django-registration-redux==2.9
+idna==3.2
+Pillow==8.3.2
+psycopg2==2.9.1
+PySimpleGUI==4.47.0
 pytz==2021.1
+requests==2.26.0
+sqlparse==0.4.2
+urllib3==1.26.6
