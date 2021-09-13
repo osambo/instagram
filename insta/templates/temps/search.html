@@ -1,0 +1,48 @@
+{%extends 'temps/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+{{block.super}}
+<div class="container">
+
+  <div class="row">
+    {% if usernames %}
+    <h1 style="font-family: 'Grand Hotel', cursive;">Found {{ usernames|length }} user(s) with username {{message}}</h1>
+    {% else %}
+    <h1 style="font-family: 'Grand Hotel', cursive;"> Found 0 users for the search term {{message}}</h1>
+    {% endif %}
+
+  </div>
+  <div class="row">
+    
+    {% for user in usernames %}
+    <div class="container">
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <h2><a href="" class="others"><class="list-inline" style="color: black; text-decoration: none;"> {{user.username}}</a></h2>
+        </li>
+        {% if user in users %}
+        <li class="list-inline-item">
+          <a href=""><button class="btn btn-info btn-sm">Following</button></a>
+        </li>
+        {% else %}
+        <li class="list-inline-item">
+          <a href=""><button class="btn btn-info btn-sm">Follow</button></a>
+        </li>
+        {% endif %}
+      </ul>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+{% endblock %}
