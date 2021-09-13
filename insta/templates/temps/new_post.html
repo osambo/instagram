@@ -1,0 +1,26 @@
+{%extends 'temps/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+
+{%block content%}
+    {{block.super}}
+    <div class="container text-center">
+        <div class="card" style="margin-top:5%;">
+            <h1 class="card-header" style="font-family: 'Grand Hotel', cursive;">Image Uploader</h1>
+            <form enctype="multipart/form-data" method="POST" action="" class="card-header">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class='btn btn-primary' value="Upload" />
+            </form>
+        </div>
+
+
+    </div>
+{%endblock%}
