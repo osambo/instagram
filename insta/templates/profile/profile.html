@@ -1,0 +1,117 @@
+{%extends 'temps/base.html'%}
+
+{%block content%}
+{{block.super}}
+<div class="container text-center">
+    <div class="card bg-light" style="margin-top:5%;padding-top: 3%;padding-bottom: 3%;">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                {%if user.profile.photo%}
+                <img class="img-circle" src="{{user.profile.photo.url}}" style="height:200px;width: 200px;"
+                    alt="No profile pic">
+                {%else%}
+                <p>No profile picture!</p>
+                {%endif%}
+            </div>
+
+            {% if request.user.is_authenticated%}
+            <div class="follow-toggle__container">
+              <button class="btn btn-primary {% if not following %}follow-user{% else %}unfollow-user{% endif %}">
+                {% if not following %}
+                  Follow
+                {% else %}
+                  Following
+                {% endif %}
+              </button>
+
+            </div>
+
+          {% endif %}
+            <div class="col-xs-6 col-sm-6 col-md-3">
+                <strong style="font-size:25px;">{{current_user.username | title}}</strong>
+                <a href='/updateprofile/' class="btn btn-primary text-white">Edit profile</a>
+                <div class="fas fa-cog" style="font-size:24px;" type="button" data-toggle="modal" data-target="#logoutModal">
+                    <p class="bubble"></p>
+                    <p class="bubble"></p>
+                    <p class="bubble"></p>
+                </div>
+                {%if user.profile.bio %}
+                <p style="font-size:23px;"><strong>Bio:</strong> {{user.profile.bio}}</p>
+                {%else%}
+                <p>No bio!</p>
+                {%endif%}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        {% for post in posts %}
+        {%if post.user.username == current_user.username%}
+        <div class="col-xs-6 col-sm-6 col-md-4 card" style="padding-top:1%;margin-top:1%;padding-bottom:1%;">
+            <img src="{{post.image.url}}" class="img-responsive" alt="Image" style="height:300px;width:100%;"
+                type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}" data-whatever="{{post.id}}"
+                data-toggle="modal" data-target="#extraModal{{post.id}}">
+        </div>
+        {%endif%}
+        {% endfor %}
+    </div>
+
+    {% for post in posts %}
+
+    <div class="modal fade" id="extraModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content ">
+
+                <div class="modal-body row" style="padding:0;">
+                    <img style="height: 500px;padding:0;margin: 0;" id="image" class=" col-12 col-md-7 text-center"
+                        src='{{post.image.url}}'>
+
+                    <div class=" col-12 col-md-5 card">
+                        <div class="card-header bg-white">
+                            <p><span>Posted by:
+                                </span><strong>{{post.user.username| title}}</strong></p>
+                            <p><span>Caption:
+                                </span>{{post.caption}}</p>
+
+                        </div>
+
+                        <div class="card-body">
+                            {% for comment in comments %}
+                            {%if post.id == comment.post.id%}
+                            <p><strong>{{comment.user.username}}</strong> {{comment.comment | title}} <span
+                                    style="font-size: 10px;color:gray;">{{comment.pub_date}}</span></p>
+                            {%endif%}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    
+
+
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="text-align: center;">        
+          <a type="button" class="btn" href="">Change Password</a><br>
+          <a type="button" class="btn" href="/logout">Logout</a><br>
+          <a type="button" class="btn" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
