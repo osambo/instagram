@@ -20,5 +20,5 @@ urlpatterns=[
     url(r'^follow/(\d+)',views.follow,name="follow"),
     url(r'^search/', views.search_user, name='search'),
 ]
-if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+# if settings.DEBUG:
+    # urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
