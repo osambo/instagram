@@ -72,7 +72,8 @@ def update_profile(request):
     Function that enables one to edit their profile information
     """
     current_user = request.user
-    profile = Profile.objects.get(user=request.user)
+    # profile = Profile.objects.get(user=request.user)
+
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=Profile.objects.get(user_id=current_user))
         if form.is_valid():
@@ -83,11 +84,12 @@ def update_profile(request):
 
     
     else:
-        if Profile.objects.filter(user_id=current_user).exists():
-            form = ProfileForm(instance = Profile.objects.get(user_id=current_user))
-        else:
-            form = ProfileForm()
-    return render(request, 'profile/edit-profile.html', {'current_user':current_user, 'form':form, 'profile':profile})
+        form = ProfileForm()
+        # if Profile.objects.filter(user_id=current_user).exists():
+            # form = ProfileForm(instance = Profile.objects.get(user_id=current_user))
+        # else:
+            
+    return render(request, 'profile/edit_profile.html', {'current_user':current_user, 'form':form,})
 
 
 def profile(request, user_id):
