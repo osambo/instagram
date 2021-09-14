@@ -41,8 +41,8 @@ def signup(request):
             send_mail(
             'Welcome to Instagram App.',
             f'Hello {name},\n '
-            'Welcome to Instagram App and have fun.',
-            'nyururukelvin99@gmail.com@gmail.com',
+            'Welcome to the instagram App and have fun with your followers.',
+            'felix339575@gmail.com',
             [email],
             fail_silently=False,
             )
