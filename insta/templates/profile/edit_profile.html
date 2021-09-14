@@ -5,7 +5,7 @@
     <div class="container text-center">
         <div class="card" style="margin-top:5%;">
             <h1 class="card-header">Image Uploader</h1>
-            <form enctype="multipart/form-data" method="POST" action="{{updateProfile}}" class="card-header">
+            <form enctype="multipart/form-data" method="POST" action="{{update_profile}}" class="card-header">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" class='btn btn-primary' value="Upload" />
